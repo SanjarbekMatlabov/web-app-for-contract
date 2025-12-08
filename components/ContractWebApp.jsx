@@ -643,32 +643,48 @@ const ContractWebApp = () => {
             </div>
 
             {/* Section 8 - Rekvizitlar */}
+            {/* Section 8 - Rekvizitlar - TABLE */}
             <div className="mb-6">
               <h3 className="text-base font-bold mb-3">8. ТОМОНЛАРНИНГ МАНЗИЛЛАРИ ВА БАНК РЕКВИЗИТЛАРИ</h3>
-              <div className="grid grid-cols-2 gap-8 text-sm">
-                {/* Buyurtmachi */}
-                <div>
-                  <p className="font-bold mb-2">Буюртмачи</p>
-                  <p>ФИО: <EditableField value={formData.full_name} field="full_name" placeholder="___" width="180px" /></p>
-                  <p>Адрес: <EditableField value={formData.address} field="address" placeholder="___" width="180px" /></p>
-                  <p>Серия и номер паспорта: <EditableField value={formData.passport} field="passport" placeholder="___" width="120px" /></p>
-                  <p>Тел.: <EditableField value={formData.phone} field="phone" placeholder="+998" width="120px" /></p>
-                </div>
 
-                {/* Pudratchi */}
-                <div>
-                  <p className="font-bold mb-2">ПУДРАТЧИ</p>
-                  <p>"Bek Qurilish Developer" МЧЖ</p>
-                  <p>Манзил: 1.Toshkent Sh. Nazarbek tumani Baliqchi 69 <br /> 2.Qarshi sh. Mustaqillik I.Karimov Kucha 10M-Uy</p>
-                  
-                  <p>ИНН: 309 947 278</p>
-                  <p>Банк: "Hamkorbank" ATB Qarshi</p>
-                  <p>МФО: 01031</p>
-                  <p>Х/р: 20208000605577128001</p>
-                  <p>Тел.: +998 93 935 0207</p>
-                  <p>Директор: Серобов Ж.Т.</p>
-                </div>
-              </div>
+              <table className="w-full border-collapse text-sm">
+                <thead>
+                  <tr>
+                    <th className="border-2 border-gray-800 bg-gray-100 px-3 py-2 text-left font-bold" style={{ width: '50%' }}>
+                      Буюртмачи
+                    </th>
+                    <th className="border-2 border-gray-800 bg-gray-100 px-3 py-2 text-left font-bold" style={{ width: '50%' }}>
+                      Пудратчи
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border-2 border-gray-800 px-3 py-2 align-top">
+                      <div className="space-y-1">
+                        <p><strong>ФИО:</strong> <EditableField value={formData.full_name} field="full_name" placeholder="___" width="150px" /></p>
+                        <p><strong>Адрес:</strong> <EditableField value={formData.address} field="address" placeholder="___" width="180px" /></p>
+                        <p><strong>Паспорт:</strong> <EditableField value={formData.passport} field="passport" placeholder="___" width="100px" /></p>
+                        <p><strong>Тел.:</strong> <EditableField value={formData.phone} field="phone" placeholder="+998" width="100px" /></p>
+                      </div>
+                    </td>
+                    <td className="border-2 border-gray-800 px-3 py-2 align-top">
+                      <div className="space-y-1">
+                        <p className="font-bold mb-2">"Bek Qurilish Developer" МЧЖ</p>
+                        <p><strong>Манзил:</strong></p>
+                        <p className="ml-2">1. Toshkent Sh. Nazarbek tumani Baliqchi 69</p>
+                        <p className="ml-2">2. Qarshi sh. Mustaqillik I.Karimov Kucha 10M-Uy</p>
+                        <p><strong>ИНН:</strong> 309 947 278</p>
+                        <p><strong>Банк:</strong> "Hamkorbank" ATB Qarshi</p>
+                        <p><strong>МФО:</strong> 01031</p>
+                        <p><strong>Х/р:</strong> 20208000605577128001</p>
+                        <p><strong>Тел.:</strong> +998 93 935 0207</p>
+                        <p><strong>Директор:</strong> Серобов Ж.Т.</p>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
             {/* Pudratchi imzo va shtamp - Real o'lchamda */}
             <div className="mb-6">
@@ -1273,6 +1289,26 @@ const ContractWebApp = () => {
   }
 
   @media print {
+  #contract table {
+    page-break-inside: avoid !important;
+  }
+  
+  #contract table td {
+    vertical-align: top !important;
+    padding: 8px 6px !important;
+  }
+  
+  #contract table th {
+    background-color: #f3f4f6 !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+  
+  /* Rekvizitlar matnlari */
+  #contract table p {
+    margin-bottom: 3px !important;
+    line-height: 1.4 !important;
+  }
   @page {
     margin-top: 20mm !important;
     margin-bottom: 15mm !important;
