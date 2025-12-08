@@ -7,6 +7,7 @@ const ContractWebApp = () => {
     full_name: '',
     address: '',
     phone: '',
+    deadline: '',
     passport: '',
     tv_zona_size: '',
     tv_zona_mdf: '',
@@ -409,8 +410,12 @@ const ContractWebApp = () => {
       setIsAuthenticated(true);
     }
   }, []);
-  const [pudratchiSignature] = useState('/images/qol.jpg');
-  const [pudratchiStamp] = useState('/images/stamp.jpg');
+  const [pudratchiSignature] = useState('/images/qol.png');
+  const [pudratchiStamp] = useState('/images/stamp.png');
+
+
+
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
@@ -495,6 +500,11 @@ const ContractWebApp = () => {
               <p className="text-right text-base">
                 Toshkent SH  «{date.day}» {date.month} / {date.year} й.
               </p>
+              {formData.deadline && (
+                <p className="text-right text-base font-semibold text-blue-700">
+                  Топшириш муддати: {formData.deadline}
+                </p>
+              )}
             </div>
 
             {/* Introduction */}
@@ -649,8 +659,8 @@ const ContractWebApp = () => {
                 <div>
                   <p className="font-bold mb-2">ПУДРАТЧИ</p>
                   <p>"Bek Qurilish Developer" МЧЖ</p>
-                  <p>Манзил: 1.Toshkent Sh. Nazarbek tumani Baliqchi 69</p>
-                  <p className="ml-14">2.Qarshi sh. Mustaqillik I.Karimov Kucha 10M-Uy</p>
+                  <p>Манзил: 1.Toshkent Sh. Nazarbek tumani Baliqchi 69 <br /> 2.Qarshi sh. Mustaqillik I.Karimov Kucha 10M-Uy</p>
+                  
                   <p>ИНН: 309 947 278</p>
                   <p>Банк: "Hamkorbank" ATB Qarshi</p>
                   <p>МФО: 01031</p>
@@ -660,6 +670,44 @@ const ContractWebApp = () => {
                 </div>
               </div>
             </div>
+            {/* Pudratchi imzo va shtamp - Real o'lchamda */}
+            <div className="mb-6">
+              <div className="flex justify-end items-end">
+                <div>
+                  <div className="relative" style={{ width: '200px', height: '80px' }}>
+                    {/* Imzo - real o'lcham */}
+                    {pudratchiSignature && (
+                      <img
+                        src={pudratchiSignature}
+                        alt="Имзо"
+                        className="absolute left-2 bottom-1"
+                        style={{
+                          // height: '40px',
+                          width: 'auto',
+                          zIndex: 2
+                        }}
+                      />
+                    )}
+
+                    {/* Stamp - real o'lcham */}
+                    {pudratchiStamp && (
+                      <img
+                        src={pudratchiStamp}
+                        alt="Муҳр"
+                        className="absolute right-2 bottom-0"
+                        style={{
+                          // height: '60px',
+                          width: 'auto',
+                          // opacity: 0.85,
+                          zIndex: 1
+                        }}
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {decorImages.length > 0 && (
               <div className="mb-6 page-break-before">
                 <h3 className="text-base font-bold mb-3">ДЕКОР РАСМЛАРИ</h3>
@@ -1204,6 +1252,17 @@ const ContractWebApp = () => {
                 </div>
               </div>
             </div>
+            <div>
+              <label className="block text-sm font-semibold mb-1 text-gray-900">⏰ Битиш муддати</label>
+              <input
+                type="text"
+                value={formData.deadline}
+                onChange={(e) => handleChange('deadline', e.target.value)}
+                placeholder="15.12.2025"
+                className="w-full border-2 border-gray-900 rounded px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-600 focus:outline-none"
+              />
+              <p className="text-xs text-gray-500 mt-1">Масалан: 15.12.2025 ёки 30 кун</p>
+            </div>
           </div>
         </div>
 
@@ -1214,6 +1273,39 @@ const ContractWebApp = () => {
   }
 
   @media print {
+  @page {
+    margin-top: 20mm !important;
+    margin-bottom: 15mm !important;
+    margin-left: 15mm !important;
+    margin-right: 15mm !important;
+  }
+  
+  /* 2-sahifa boshlanishi */
+  .page-break-before {
+    page-break-before: always !important;
+    padding-top: 10mm !important;
+  }
+  
+  /* Rasmlar uchun */
+  .space-y-4 > div:first-child {
+    margin-top: 0 !important;
+  }
+  img[alt="Имзо"],
+  img[alt="Муҳр"] {
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+    filter: none !important;
+    opacity: 1 !important;
+  }
+  
+  // img[alt="Муҳр"] {
+  //   opacity: 0.85 !important;
+  // }
+  
+  /* Imzo container print da */
+  .relative {
+    page-break-inside: avoid !important;
+  }
   .page-break-before {
     page-break-before: always !important;
     margin-top: 0 !important;
