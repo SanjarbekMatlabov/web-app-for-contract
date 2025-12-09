@@ -383,8 +383,8 @@ const ContractWebApp = () => {
 
   // Default credentials
   const DEFAULT_USER = {
-    username: 'admin',
-    password: 'bek2024'
+    username: 'Admin',
+    password: 'bek'
   };
 
   // Login funksiyasi
@@ -726,7 +726,7 @@ const ContractWebApp = () => {
 
             {decorImages.length > 0 && (
               <div className="mb-6 page-break-before">
-                <h3 className="text-base font-bold mb-3">ДЕКОР РАСМЛАРИ</h3>
+                <h3 className="text-base font-bold mb-3">Буюртманинг Расмлари</h3>
                 <div className="space-y-4">
                   {decorImages.map((img, idx) => (
                     <div key={img.id} className="border-2 border-gray-300 p-3 rounded">
@@ -1289,6 +1289,48 @@ const ContractWebApp = () => {
   }
 
   @media print {
+  @supports (-webkit-touch-callout: none) {
+    #contract table {
+      -webkit-text-size-adjust: 100% !important;
+      text-size-adjust: 100% !important;
+    }
+    
+    #contract table td,
+    #contract table th {
+      -webkit-hyphens: auto !important;
+      hyphens: auto !important;
+      overflow-wrap: break-word !important;
+      word-break: break-word !important;
+      word-wrap: break-word !important;
+    }
+       #contract {
+    width: 190mm !important;
+    max-width: 190mm !important;
+    padding: 10mm !important;
+  }
+  
+  /* Jadval kengliklarini qattiq belgilash */
+  #contract table {
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+  }
+  
+  #contract table td:nth-child(1) { width: 25px !important; }  /* № */
+  #contract table td:nth-child(2) { width: auto !important; }   /* Nomi */
+  #contract table td:nth-child(3) { width: auto !important; }   /* Tavsif */
+  #contract table td:nth-child(4) { width: 60px !important; }   /* O'lchov */
+  #contract table td:nth-child(5) { width: 40px !important; }   /* Miqdor */
+  #contract table td:nth-child(6) { width: 50px !important; }   /* Narx */
+  
+  /* Text uzunligi uchun */
+  #contract table td {
+    font-size: 7px !important;
+    padding: 2px 1px !important;
+    line-height: 1.2 !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
   #contract table {
     page-break-inside: avoid !important;
   }
